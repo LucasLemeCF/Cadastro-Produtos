@@ -36,7 +36,8 @@
         <div class="row mb-3">
           <div class="col">
             <label class="form-label">Data de Implementação</label>
-            <input type="text" class="form-control">  </div>
+            <input type="text" class="form-control">  
+          </div>
           <div class="col">
             <label class="form-label">Data de liberação</label>
             <input type="text" class="form-control">     

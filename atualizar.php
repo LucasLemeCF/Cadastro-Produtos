@@ -4,6 +4,15 @@
     <meta charset="utf-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
+
+<?php
+  require 'config.php';
+  require 'produto.php';
+
+  $obj_produto = new Produto($mysql);
+  $produto = $obj_produto->encontrarPorCodigo($_GET['codigo']);
+?>
+
 <body>
 <div class="card border-warning m-3">
     <h5 class="card-header text-warning">Atualizar</h5>
@@ -15,7 +24,7 @@
             <input type="text" class="form-control">
           </div>
           <div class="col">
-            <label class="form-label">Código</label>
+            <label class="form-label" id=<?php echo $artigo['codigo']; ?>>Código</label>
             <input type="text" class="form-control"> 
           </div>
         </div>
