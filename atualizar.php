@@ -25,8 +25,13 @@
             <input type="text" class="form-control"> 
           </div>
           <div class="col">
-            <label class="form-label">Grupo</label>
-            <input type="text" class="form-control">  
+            <label class="form-label">Família</label>  
+            <select class="form-select" aria-label="familia">
+              <option selected>Selecione a família</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
           </div>
           <div class="col">
             <label class="form-label">Situação</label>
