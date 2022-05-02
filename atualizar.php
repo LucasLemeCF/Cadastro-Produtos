@@ -21,8 +21,13 @@
         </div>
         <div class="row mb-3">
           <div class="col">
-            <label class="form-label">Un. de Medida</label>  
-            <input type="text" class="form-control"> 
+            <label class="form-label">Unidade de Medida</label>  
+            <select class="form-select" aria-label="familia">
+              <option selected>Selecione a Unidade de Medida</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
           </div>
           <div class="col">
             <label class="form-label">Família</label>  
