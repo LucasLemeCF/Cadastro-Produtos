@@ -61,7 +61,7 @@
           </div>
         </div>
         <button type="submit" class="btn btn-warning">Atualizar</button>
-        <button type="submit" class="btn btn-outline-warning">Voltar</button>
+        <a type="button" class="btn btn-outline-warning" href="http://localhost:8081/Cadastro-Produtos/lista.php">Voltar</a>
       </form>
     </div>
   </div>

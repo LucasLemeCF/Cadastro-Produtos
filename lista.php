@@ -10,7 +10,7 @@
     <a class="navbar-brand">CRUD em PHP</a>
   </div>
 </nav>
-<button type="button" class="btn btn-success m-3" href="#">Adicionar</button>
+<a type="button" class="btn btn-success m-3" href="http://localhost:8081/Cadastro-Produtos/adicionar.php">Adicionar</a>
 <table class="table table-striped align-middle text-center">
     <thead> 
     <tr>
@@ -35,7 +35,7 @@
       <td>Ativo</td>
       <td>
         <button type="button" class="btn btn-primary">Descrição</button>
-        <button type="button" class="btn btn-warning">Atualizar</button>
+        <a type="button" class="btn btn-warning" href="http://localhost:8081/Cadastro-Produtos/atualizar.php">Atualizar</a>
         <button type="button" class="btn btn-danger">Excluir</button>
       </td>
     </tr>
@@ -49,7 +49,7 @@
       <td>Ativo</td>
       <td>
         <button type="button" class="btn btn-primary">Descrição</button>
-        <button type="button" class="btn btn-warning">Atualizar</button>
+        <a type="button" class="btn btn-warning" href="http://localhost:8081/Cadastro-Produtos/atualizar.php">Atualizar</a>
         <button type="button" class="btn btn-danger">Excluir</button>
       </td>
     </tr>
@@ -63,7 +63,7 @@
       <td>Ativo</td>
       <td>
         <button type="button" class="btn btn-primary">Descrição</button>
-        <button type="button" class="btn btn-warning">Atualizar</button>
+        <a type="button" class="btn btn-warning" href="http://localhost:8081/Cadastro-Produtos/atualizar.php">Atualizar</a>
         <button type="button" class="btn btn-danger">Excluir</button>
       </td>
     </tr>
@@ -77,7 +77,7 @@
       <td>Ativo</td>
       <td>
         <button type="button" class="btn btn-primary">Descrição</button>
-        <button type="button" class="btn btn-warning">Atualizar</button>
+        <a type="button" class="btn btn-warning" href="http://localhost:8081/Cadastro-Produtos/atualizar.php">Atualizar</a>
         <button type="button" class="btn btn-danger">Excluir</button>
       </td>
     </tr>
@@ -91,7 +91,7 @@
       <td>Ativo</td>
       <td>
         <button type="button" class="btn btn-primary">Descrição</button>
-        <button type="button" class="btn btn-warning">Atualizar</button>
+        <a type="button" class="btn btn-warning" href="http://localhost:8081/Cadastro-Produtos/atualizar.php">Atualizar</a>
         <button type="button" class="btn btn-danger">Excluir</button>
       </td>
     </tr>
@@ -105,7 +105,7 @@
       <td>Ativo</td>
       <td>
         <button type="button" class="btn btn-primary">Descrição</button>
-        <button type="button" class="btn btn-warning">Atualizar</button>
+        <a type="button" class="btn btn-warning" href="http://localhost:8081/Cadastro-Produtos/atualizar.php">Atualizar</a>
         <button type="button" class="btn btn-danger">Excluir</button>
       </td>
     </tr>
