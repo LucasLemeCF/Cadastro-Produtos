@@ -8,6 +8,14 @@
     <link rel="stylesheet" type="text/css" href="./styles.css">
 </head>
 
+<?php
+  require 'config.php';
+  require 'produto.php';
+
+  $obj_produto = new Produto($mysql);
+  $produto = $obj_produto->encontrarPorCodigo($_GET['codigo']);
+?>
+
 <body>
     <div class="card border-warning m-3">
         <h5 class="card-header text-warning">Atualizar</h5>
