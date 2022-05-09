@@ -2,7 +2,12 @@
 <html lang="pt-br">
 
 <head>
-    <title class="titlePag"></title>
+    <?php if (isset($_GET['id']) && !empty($_GET['id'])) {
+        echo '<title>Atualizar</title>';
+    } else {
+        echo '<title>Adicionar</title>';
+    } ?>
+    <!-- <title class="titlePag"></title> -->
     <meta charset="utf-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -10,9 +15,25 @@
     <script src="ajust.js"></script>
 </head>
 
+<?php
+require 'config.php';
+require 'produto.php';
+
+$obj_produto = new Produto($mysql);
+$produto = $obj_produto->encontrarPorCodigo($_GET['codigo']);
+?>
+
 <body>
-    <div class="card border-warning m-3">
-        <h5 class="card-header text-warning"></h5>
+    <div class="card <?php if (isset($_GET['id']) && !empty($_GET['id'])) {
+                            echo 'border-warning';
+                        } else {
+                            echo 'border-success';
+                        } ?> m-3">
+        <?php if (isset($_GET['id']) && !empty($_GET['id'])) {
+            echo '<h5 class="card-header text-warning">Atualizar</h5>';
+        } else {
+            echo '<h5 class="card-header text-success">Adicionar</h5>';
+        } ?>
         <div class="card-body">
             <form>
                 <div class="row mb-3 mt-3">
@@ -76,9 +97,17 @@
                         <input type="text" class="form-control">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-warning">Atualizar</button>
-                <a type="button" class="btn btn-outline-warning"
-                    href="http://localhost:8081/Cadastro-Produtos/lista.php">Voltar</a>
+                <?php if (isset($_GET['id']) && !empty($_GET['id'])) {
+                    echo '<button type="submit" class="btn btn-warning">Atualizar</button>
+                    <a type="button" class="btn btn-outline-warning"
+                    href="http://localhost:8081/Cadastro-Produtos/lista.php">Voltar</a>';
+                } else {
+                    echo '<button type="submit" class="btn btn-success">Adicionar</button>
+                    <a type="button" class="btn btn-outline-success"
+                    href="http://localhost:8081/Cadastro-Produtos/lista.php">Voltar</a>';
+                } ?>
+                <!--  <button type="submit" class="btn btn-warning">Atualizar</button> -->
+
             </form>
         </div>
     </div>
