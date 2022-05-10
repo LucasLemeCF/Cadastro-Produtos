@@ -10,8 +10,8 @@
 
 <?php
   require 'config.php';
-
   include 'produto.php';
+  
   $produto = new Produto($mysql);
   $produtos = $produto->exibirTodos();
 ?>
@@ -23,18 +23,19 @@
         </div>
     </nav>
     <a type="button" class="btn btn-success m-3"
-        href="http://localhost:8081/Cadastro-Produtos/adicionar/adicionar.php">Adicionar</a>
+        href="http://localhost:8081/Cadastro-Produtos/form.php">Adicionar</a>
     <table class="table table-striped align-middle text-center">
         <thead>
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Código</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Grupo</th>
+                <th scope="col">familia</th>
                 <th scope="col">Und. Medida</th>
                 <th scope="col">Data de Implementação</th>
                 <th scope="col">Data de Liberação</th>
                 <th scope="col">Situação</th>
+                <th scope="col">Estabelecimento</th>
                 <th scope="col">Ação</th>
             </tr>
         </thead>
@@ -44,11 +45,12 @@
                 <td><?php echo $produto['id']; ?></td>
                 <td><?php echo $produto['codigo']; ?></td>
                 <td><?php echo $produto['nome']; ?></td>
-                <td><?php echo $produto['grupo']; ?></td>
+                <td><?php echo $produto['familia']; ?></td>
                 <td><?php echo $produto['unidade_medida']; ?></td>
                 <td><?php echo $produto['data_implementacao']; ?></td>
-                <td><?php echo $produto['data_liberacao']; ?></td>
+                <td><?php echo $produto['data_liberacao']; ?></td>      
                 <td><?php echo $produto['situacao']; ?></td>
+                <td><?php echo $produto['estabelecimento']; ?></td>
                 <td>
                     <button type="button" class="btn btn-primary">Descrição</button>
                     <button type="button" class="btn btn-warning">Atualizar</button>
