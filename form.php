@@ -25,6 +25,10 @@
         header('Location: lista.php');
         die();
     }
+
+    if(!empty($_GET['id'])) {
+        //carrega página de atualização
+    }
    
 ?>
 

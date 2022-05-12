@@ -9,11 +9,11 @@
 </head>
 
 <?php
-  require 'config.php';
-  include 'produto.php';
-  
-  $produto = new Produto($mysql);
-  $produtos = $produto->exibirTodos();
+    require 'config.php';
+    include 'produto.php';
+
+    $produto = new Produto($mysql);
+    $produtos = $produto->exibirTodos();
 ?>
 
 <body>
@@ -54,7 +54,7 @@
                 <td>
                     <button type="button" class="btn btn-primary">Descrição</button>
                     <button type="button" class="btn btn-warning">Atualizar</button>
-                    <button type="button" class="btn btn-danger">Excluir</button>
+                    <a type="button" class="btn btn-danger" name="excluir" href="excluir.php?id=<?php echo $produto['id']; ?>">Excluir</a>
                 </td>
             </tr>
             <?php endforeach; ?>
