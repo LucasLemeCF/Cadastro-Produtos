@@ -23,7 +23,7 @@ class Produto
     }
 
     public function encontrarPorId(string $id): array {
-        $selecionaProduto = $this->mysql->prepare("SELECT id FROM produtos WHERE id = ?");
+        $selecionaProduto = $this->mysql->prepare("SELECT * FROM produtos WHERE id = ?");
         $selecionaProduto->bind_param('s', $id);
         $selecionaProduto->execute();
         $produto = $selecionaProduto->get_result()->fetch_assoc();

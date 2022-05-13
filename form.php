@@ -1,13 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-    <?php if (isset($_GET['id']) && !empty($_GET['id'])) {
-        echo '<title>Atualizar</title>';
+<?php
+    require 'config.php';
+    require 'produto.php';
+
+    $produto = new Produto($mysql);
+
+    if(isset($_GET['id']) && !empty($_GET['id'])) {
+        $title = '<title>Atualizar</title>';
+        $cardColor = 'border-warning';
+        $cardHeader = '<h5 class="card-header text-warning">Atualizar</h5>';
+        $button = '<button type="submit" class="btn btn-warning">Atualizar</button>
+        <a type="button" class="btn btn-outline-warning" href="http://localhost:8081/Cadastro-Produtos/lista.php">Voltar</a>';
+
+        $produto = $produto->encontrarPorId($_GET['id']);
+        $nome = $produto["nome"];
+        $codigo = $produto['codigo'];
+        $unidadeMedida = $produto["unidade_medida"];
+        $familia = $produto['familia'];
+        $situacao = $produto['situacao'];
+        $dataImplementacao = $produto['data_implementacao'];
+        $dataLiberacao = $produto['data_liberacao'];
+        $descricao = $produto['descricao'];
+        $estabelecimento = $produto['estabelecimento'];
+        $informacoesComplementares = $produto['informacoes_complementares'];
+        
     } else {
-        echo '<title>Adicionar</title>';
-    } ?>
-    <!-- <title class="titlePag"></title> -->
+        $title = '<title>Adicionar</title>';
+        $cardColor = 'border-success';
+        $cardHeader = '<h5 class="card-header text-success">Adicionar</h5>';
+        $button = '<button type="submit" class="btn btn-success">Adicionar</button>
+        <a type="button" class="btn btn-outline-success" href="http://localhost:8081/Cadastro-Produtos/lista.php">Voltar</a>';
+
+        $nome = '';
+        $codigo = '';
+        $unidadeMedida = 'Selecione a Unidade de Medida';
+        $familia = 'Selecione a família';
+        $situacao = 'Selecione a situação';
+        $dataImplementacao = '';
+        $dataLiberacao = '';
+        $descricao = '';
+        $estabelecimento = '';
+        $informacoesComplementares = '';
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $novoProduto = new Produto($mysql);
+            $novoProduto->adicionar($_POST['nome'], $_POST['codigo'], $_POST['unidade_medida'], $_POST['familia'], $_POST['situacao'], $_POST['data_implementacao'], $_POST['data_liberacao'], $_POST['descricao'], $_POST['estabelecimento'], $_POST['informacoes_complementares']);
+            header('Location: lista.php');
+            die();
+        }
+    }
+
+?>
+
+<head>
+    <?php echo $title ?>
     <meta charset="utf-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -15,52 +63,26 @@
     <script src="ajust.js"></script>
 </head>
 
-<?php
-    require 'config.php';
-    require 'produto.php';
-
-    if($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $produto = new Produto($mysql);
-        $produto->adicionar($_POST['nome'], $_POST['codigo'], $_POST['unidade_medida'], $_POST['familia'], $_POST['situacao'], $_POST['data_implementacao'], $_POST['data_liberacao'], $_POST['descricao'], $_POST['estabelecimento'], $_POST['informacoes_complementares']);
-        header('Location: lista.php');
-        die();
-    }
-
-    if(!empty($_GET['id'])) {
-        //carrega página de atualização
-    }
-   
-?>
-
 <body>
-    <div class="card 
-        <?php if (isset($_GET['id']) && !empty($_GET['id'])) {
-            echo 'border-warning';
-        } else {
-            echo 'border-success';
-        } ?> m-3">
-        <?php if (isset($_GET['id']) && !empty($_GET['id'])) {
-            echo '<h5 class="card-header text-warning">Atualizar</h5>';
-        } else {
-            echo '<h5 class="card-header text-success">Adicionar</h5>';
-        } ?>
+    <div class="card m-3 <?php echo $cardColor ?>">
+        <?php echo $cardHeader?>
         <div class="card-body">
             <form action="form.php" method="POST">
             <div class="row mb-3 mt-3">
                     <div class="col">
                         <label class="form-label">Nome</label>
-                        <input type="text" class="form-control" name="nome">
+                        <input type="text" class="form-control" name="nome" value="<?php echo $nome ?>">
                     </div>
                     <div class="col">
                         <label class="form-label">Código</label>
-                        <input type="text" class="form-control" name="codigo">
+                        <input type="text" class="form-control" name="codigo" value="<?php echo $codigo ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col">
                         <label class="form-label">Unidade de Medida</label>
-                        <select class="form-select" aria-label="unidade_medida" name="unidade_medida">
-                            <option selected>Selecione a Unidade de Medida</option>
+                        <select class="form-select" aria-label="unidade_medida" name="unidade_medida" >
+                            <option selected value="<?php echo $unidadeMedida ?>"> <?php echo $unidadeMedida ?> </option>
                             <option value="UN">UN - Unidade</option>
                             <option value="PC">PC - Peça</option>
                             <option value="KG">KG - Kilograma</option>
@@ -70,7 +92,7 @@
                     <div class="col">
                         <label class="form-label">Família</label>
                         <select class="form-select" aria-label="familia" name="familia">
-                            <option selected>Selecione a família</option>
+                            <option selected value="<?php echo $familia ?>"> <?php echo $familia ?> </option>
                             <option value="MTE">MTE - Material de Escritório</option>
                             <option value="MTP">MTP - Materia Prima</option>
                             <option value="PA">PA - Produto Acabado</option>
@@ -79,7 +101,7 @@
                     <div class="col">
                         <label class="form-label">Situação</label>
                         <select class="form-select" aria-label="situacao" name="situacao">
-                            <option selected>Selecione a situação</option>
+                            <option selected value="<?php echo $situacao ?>"> <?php echo $situacao ?> </option>
                             <option value="ativo">Ativo</option>
                             <option value="obsoleto">Obsoleto</option>
                             <option value="inativo">Inativo</option>
@@ -89,40 +111,32 @@
                 <div class="row mb-3">
                     <div class="col">
                         <label class="form-label">Data de Implementação</label>
-                        <input type="date" class="form-control" name="data_implementacao">
+                        <input type="date" class="form-control" name="data_implementacao" value="<?php echo $dataImplementacao ?>">
                     </div>
                     <div class="col">
                         <label class="form-label">Data de liberação</label>
-                        <input type="date" class="form-control" name="data_liberacao">
+                        <input type="date" class="form-control" name="data_liberacao" value="<?php echo $dataLiberacao ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col">
                         <label class="form-label">Descrição</label>
-                        <textarea type="text" class="form-control overflow-auto" name="descricao"></textarea>
+                        <textarea type="text" class="form-control overflow-auto" name="descricao"><?php echo $descricao ?></textarea>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col">
                         <label class="form-label">Estabelecimento</label>
-                        <input type="text" class="form-control" name="estabelecimento">
+                        <input type="text" class="form-control" name="estabelecimento" value="<?php echo $estabelecimento ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col">
                         <label class="form-label">Informações complementares</label>
-                        <textarea type="text" class="form-control overflow-auto" name="informacoes_complementares"></textarea>
+                        <textarea type="text" class="form-control overflow-auto" name="informacoes_complementares"><?php echo $informacoesComplementares ?></textarea>
                     </div>
                 </div>
-                <?php if (isset($_GET['id']) && !empty($_GET['id'])) {
-                    echo '<button type="submit" class="btn btn-warning">Atualizar</button>
-                    <a type="button" class="btn btn-outline-warning"
-                    href="http://localhost:8081/Cadastro-Produtos/lista.php">Voltar</a>';
-                } else {
-                    echo '<button type="submit" class="btn btn-success">Adicionar</button>
-                    <a type="button" class="btn btn-outline-success"
-                    href="http://localhost:8081/Cadastro-Produtos/lista.php">Voltar</a>';
-                } ?>
+                <?php echo $button ?>
             </form>
         </div>
     </div>
