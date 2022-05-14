@@ -23,7 +23,7 @@
         </div>
     </nav>
     <a type="button" class="btn btn-success m-3"
-        href="http://localhost:8081/Cadastro-Produtos/form.php">Adicionar</a>
+        href="form.php">Adicionar</a>
     <table class="table table-striped align-middle text-center">
         <thead>
             <tr>
@@ -53,7 +53,7 @@
                 <td><?php echo $produto['estabelecimento']; ?></td>
                 <td>
                     <button type="button" class="btn btn-primary">Descrição</button>
-                    <button type="button" class="btn btn-warning">Atualizar</button>
+                    <a type="button" class="btn btn-warning" href="form.php?id=<?php echo $produto['id']; ?>">Atualizar</a>
                     <a type="button" class="btn btn-danger" name="excluir" href="excluir.php?id=<?php echo $produto['id']; ?>">Excluir</a>
                 </td>
             </tr>

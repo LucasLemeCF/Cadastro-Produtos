@@ -9,10 +9,11 @@
 
     if(isset($_GET['id']) && !empty($_GET['id'])) {
         $title = '<title>Atualizar</title>';
+        $action = "atualizar.php";
         $cardColor = 'border-warning';
         $cardHeader = '<h5 class="card-header text-warning">Atualizar</h5>';
-        $button = '<button type="submit" class="btn btn-warning">Atualizar</button>
-        <a type="button" class="btn btn-outline-warning" href="http://localhost:8081/Cadastro-Produtos/lista.php">Voltar</a>';
+        $button = '<a type="submit" name="atualizar"  class="btn btn-warning" >Atualizar</a>
+        <a type="button" class="btn btn-outline-warning" href="lista.php">Voltar</a>';
 
         $produto = $produto->encontrarPorId($_GET['id']);
         $nome = $produto["nome"];
@@ -25,13 +26,20 @@
         $descricao = $produto['descricao'];
         $estabelecimento = $produto['estabelecimento'];
         $informacoesComplementares = $produto['informacoes_complementares'];
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            //$novoProduto = new Produto($mysql);
+            //$novoProduto->atualizar($_POST['nome'], $_POST['codigo'], $_POST['unidade_medida'], $_POST['familia'], $_POST['situacao'], $_POST['data_implementacao'], $_POST['data_liberacao'], $_POST['descricao'], $_POST['estabelecimento'], $_POST['informacoes_complementares'], $_POST['id']);
+            header('Location: atualizar.php');
+        }
         
     } else {
         $title = '<title>Adicionar</title>';
+        $action = "form.php";
         $cardColor = 'border-success';
         $cardHeader = '<h5 class="card-header text-success">Adicionar</h5>';
-        $button = '<button type="submit" class="btn btn-success">Adicionar</button>
-        <a type="button" class="btn btn-outline-success" href="http://localhost:8081/Cadastro-Produtos/lista.php">Voltar</a>';
+        $button = '<a type="submit" class="btn btn-success">Adicionar</a>
+        <a type="button" class="btn btn-outline-success" href="lista.php">Voltar</a>';
 
         $nome = '';
         $codigo = '';
@@ -46,12 +54,11 @@
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $novoProduto = new Produto($mysql);
-            $novoProduto->adicionar($_POST['nome'], $_POST['codigo'], $_POST['unidade_medida'], $_POST['familia'], $_POST['situacao'], $_POST['data_implementacao'], $_POST['data_liberacao'], $_POST['descricao'], $_POST['estabelecimento'], $_POST['informacoes_complementares']);
+            $novoProduto->adicionar($_POST['nome'], $_POST['codigo'], $_POST['unidade_medida'], $_POST['familia'], $_POST['situacao'], $_POST['data_implementacao'], $_POST['data_liberacao'], $_POST['descricao'], $_POST['estabelecimento'], $_POST['informacoes_complementares']);     
             header('Location: lista.php');
-            die();
         }
     }
-
+    
 ?>
 
 <head>
@@ -67,7 +74,8 @@
     <div class="card m-3 <?php echo $cardColor ?>">
         <?php echo $cardHeader?>
         <div class="card-body">
-            <form action="form.php" method="POST">
+            <form action=<?php echo $action ?> method="POST">
+            <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
             <div class="row mb-3 mt-3">
                     <div class="col">
                         <label class="form-label">Nome</label>
