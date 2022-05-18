@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17-Maio-2022 às 02:12
+-- Tempo de geração: 18-Maio-2022 às 13:21
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.0.15
 
@@ -32,13 +32,21 @@ CREATE TABLE `produtos` (
   `codigo` varchar(100) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `descricao` varchar(100) NOT NULL,
-  `unidade` int(11) NOT NULL,
-  `familia` varchar(100) NOT NULL,
-  `situacao` int(11) NOT NULL,
-  `data_implementacao` timestamp NOT NULL DEFAULT current_timestamp(),
-  `data_liberacao` timestamp NOT NULL DEFAULT current_timestamp(),
-  `empresa` int(11) NOT NULL
+  `unidade_medida` varchar(3) NOT NULL,
+  `familia` varchar(3) NOT NULL,
+  `situacao` varchar(10) NOT NULL,
+  `data_implementacao` date NOT NULL,
+  `data_liberacao` date NOT NULL,
+  `estabelecimento` varchar(150) NOT NULL,
+  `informacoes_complementares` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `produtos`
+--
+
+INSERT INTO `produtos` (`id`, `codigo`, `nome`, `descricao`, `unidade_medida`, `familia`, `situacao`, `data_implementacao`, `data_liberacao`, `estabelecimento`, `informacoes_complementares`) VALUES
+(1, 'MTE001', 'Teste', 'Teste de Cadastro de Produto', 'UN', 'MTE', 'ativo', '2022-05-17', '2022-05-24', 'Felipe', 'Teste 6');
 
 --
 -- Índices para tabelas despejadas
@@ -50,6 +58,16 @@ CREATE TABLE `produtos` (
 ALTER TABLE `produtos`
   ADD PRIMARY KEY (`id`,`nome`),
   ADD UNIQUE KEY `codigo` (`codigo`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `produtos`
+--
+ALTER TABLE `produtos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
