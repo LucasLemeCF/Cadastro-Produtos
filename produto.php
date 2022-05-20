@@ -34,15 +34,11 @@ class Produto
         return $produto;
     }
 
-    public function atualizar(string $nome, string $codigo, string $unidade_medida, string $familia, string $situacao, string $data_implementacao, string $data_liberacao, string $descricao, string $estabelecimento, string $informacoes_complementares, string $id): void
+    public function atualizar(string $nome, string $unidade_medida, string $familia, string $situacao, string $data_implementacao, string $data_liberacao, string $descricao, string $estabelecimento, string $informacoes_complementares, int $id): void
     {
-        include_once('config.php');
-        $sqlEditar = "UPDATE produtos SET nome='$nome', codigo='$codigo', unidade_medida='$unidade_medida', familia='$familia', situacao='$situacao', data_implementacao='$data_implementacao', data_liberacao='$data_liberacao', descricao = '$descricao', estabelecimento = '$estabelecimento', informacoes_complementares = '$informacoes_complementares' WHERE id='$id'";
-        //$editarProduto = $this->mysql->prepare($sqlEditar); 
-        //$editarProduto = $this->mysql->prepare('UPDATE produtos SET nome = ?, codigo = ?, unidade_medida = ?, familia = ?, situacao = ?, data_implementacao = ?, data_liberacao = ?, descricao = ?, estabelecimento = ?, informacoes_complementares = ? WHERE id = ?');
-        //$editarProduto->bind_param('sssssssssss', $nome, $codigo, $unidade_medida, $familia, $situacao, $data_implementacao, $data_liberacao, $descricao, $estabelecimento, $informacoes_complementares, $id);
-        //$editarProduto->execute();
-        $mysql->query($sqlEditar);
+        $editarProduto = $this->mysql->prepare('UPDATE produtos SET nome = ?, unidade_medida = ?, familia = ?, situacao = ?, data_implementacao = ?, data_liberacao = ?, descricao = ?, estabelecimento = ?, informacoes_complementares = ? WHERE id = ?');
+        $editarProduto->bind_param('sssssssssi', $nome, $unidade_medida, $familia, $situacao, $data_implementacao, $data_liberacao, $descricao, $estabelecimento, $informacoes_complementares, $id);
+        $editarProduto->execute();
     }
 
     public function newCode(string $codigo)

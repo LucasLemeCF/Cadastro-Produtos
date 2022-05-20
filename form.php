@@ -8,17 +8,19 @@ require 'produto.php';
 $produtos = new Produto($mysql);
 
 if (isset($_GET['id']) && !empty($_GET['id'])) {
+    $id = $_GET['id'];
     $title = '<title>Atualizar</title>';
-    $action = "atualizar.php";
     $cardColor = 'border-warning';
     $cardHeader = '<h5 class="card-header text-warning">Atualizar</h5>';
-    $button = '<a type="submit" name="atualizar"  class="btn btn-warning" >Atualizar</a>
-    <a type="button" class="btn btn-outline-warning" href="lista.php">Voltar</a>';
+    $button = '<button type="submit" name="atualizar" class="btn btn-warning" >Atualizar</button>
+    <a type="button" class="btn btn-outline-warning" href="lista.php" >Voltar</a>';
 
-    $produto = $produtos->encontrarPorId($_GET['id']);
-    $nome = $produto["nome"];
+    $id = str_replace("'", "", $id);
+    $id = intval($id);
+    $produto = $produtos->encontrarPorId($id);
+    $nome = $produto['nome'];
     $codigo = $produto['codigo'];
-    $unidadeMedida = $produto["unidade_medida"];
+    $unidadeMedida = $produto['unidade_medida'];
     $familia = $produto['familia'];
     $situacao = $produto['situacao'];
     $dataImplementacao = $produto['data_implementacao'];
@@ -28,13 +30,12 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     $informacoesComplementares = $produto['informacoes_complementares'];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        //$novoProduto = new Produto($mysql);
-        //$novoProduto->atualizar($_POST['nome'], $_POST['codigo'], $_POST['unidade_medida'], $_POST['familia'], $_POST['situacao'], $_POST['data_implementacao'], $_POST['data_liberacao'], $_POST['descricao'], $_POST['estabelecimento'], $_POST['informacoes_complementares'], $_POST['id']);
-        header('Location: atualizar.php');
+        $novoProduto = new Produto($mysql);
+        $novoProduto->atualizar($_POST['nome'], $_POST['unidade_medida'], $_POST['familia'], $_POST['situacao'], $_POST['data_implementacao'], $_POST['data_liberacao'], $_POST['descricao'], $_POST['estabelecimento'], $_POST['informacoes_complementares'], $id);
+        header('Location: lista.php');
     }
 } else {
     $title = '<title>Adicionar</title>';
-    $action = "form.php";
     $cardColor = 'border-success';
     $cardHeader = '<h5 class="card-header text-success">Adicionar</h5>';
     $button = '<button type="submit" class="btn btn-success">Adicionar</button>
@@ -72,8 +73,8 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <div class="card m-3 <?php echo $cardColor ?>">
         <?php echo $cardHeader ?>
         <div class="card-body">
-            <form action=<?php echo $action ?> method="POST">
-                <input type="hidden" name="id"
+            <form method="POST">
+                <input type="hidden" name="id" id="id"
                     value="<?php isset($_GET['id']) && !empty($_GET['id']) ? $_GET['id'] : ""  ?>">
                 <div class="row mb-3 mt-3">
                     <div class="col">
