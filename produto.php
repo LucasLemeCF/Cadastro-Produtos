@@ -43,7 +43,7 @@ class Produto
 
     public function newCode(string $codigo)
     {
-        $result = $this->mysql->query("SELECT MAX(codigo) FROM produtos WHERE codigo LIKE '$codigo';");
+        $result = $this->mysql->query("SELECT MAX(codigo) FROM produtos WHERE codigo LIKE '%$codigo%';");
         $code = $result->fetch_all(MYSQLI_ASSOC);
         $code = $code[0]['MAX(codigo)'];
         if ($code == NULL) {
